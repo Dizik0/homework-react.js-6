@@ -5,6 +5,7 @@ import style from "./Filter.module.scss";
 import { connect } from "react-redux";
 
 import * as actions from "../../redux/contact/contact-action";
+import { getFilter } from "../../redux/contact/contact-selectors";
 
 class Filter extends Component {
   state = {
@@ -30,7 +31,7 @@ Filter.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  filter: state.contact.filter,
+  filter: getFilter(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

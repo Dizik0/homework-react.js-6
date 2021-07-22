@@ -4,6 +4,7 @@ import style from "./AddContact.module.scss";
 
 import { connect } from "react-redux";
 import { addContact } from "../../redux/contact/contact-opetations";
+import { getContacts } from "../../redux/contact/contact-selectors";
 
 class AddContact extends Component {
   state = {
@@ -16,12 +17,6 @@ class AddContact extends Component {
       return name === this.state.name;
     });
   };
-
-  // deleteTodo = (todoId) => {
-  //   this.setState((prevState) => ({
-  //     todos: prevState.todos.filter((todo) => todo.id !== todoId),
-  //   }));
-  // };
 
   submitformContact = (e) => {
     e.preventDefault();
@@ -95,7 +90,7 @@ AddContact.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-  contacts: state.contact,
+  contacts: getContacts(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

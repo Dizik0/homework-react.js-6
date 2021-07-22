@@ -1,14 +1,3 @@
 {
-  "contact": [
-    {
-      "name": "sdfsdf",
-      "number": "1231231",
-      "id": "28aebc39-7248-48e9-8a14-43291c8230ee"
-    },
-    {
-      "name": "dfhfghfgh",
-      "number": "123123",
-      "id": "26154369-51df-4e2d-8f4e-c0f53a539def"
-    }
-  ]
+  "contact": []
 }

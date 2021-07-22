@@ -5,6 +5,7 @@ import style from "./ContactList.module.scss";
 import { connect } from "react-redux";
 import { deleteContact } from "../../redux/contact/contact-opetations";
 import { fetchContact } from "../../redux/contact/contact-opetations";
+import { getFilterContacts } from "../../redux/contact/contact-selectors";
 
 class ContactList extends Component {
   componentDidMount = () => {
@@ -15,21 +16,23 @@ class ContactList extends Component {
     const { filterTodos, deleteTodo, uuidv4 } = this.props;
 
     return (
-      <ul className={style.list}>
-        {filterTodos.map(({ name, number, id }) => (
-          <li key={uuidv4()} className={style.listItem}>
-            <p className={style.name}>{name}</p>
-            <span className={style.number}>{number}</span>
-            <button
-              className={style.button}
-              type="button"
-              onClick={() => deleteTodo(id)}
-            >
-              Удалить
-            </button>
-          </li>
-        ))}
-      </ul>
+      <>
+        <ul className={style.list}>
+          {filterTodos.map(({ name, number, id }) => (
+            <li key={uuidv4()} className={style.listItem}>
+              <p className={style.name}>{name}</p>
+              <span className={style.number}>{number}</span>
+              <button
+                className={style.button}
+                type="button"
+                onClick={() => deleteTodo(id)}
+              >
+                Удалить
+              </button>
+            </li>
+          ))}
+        </ul>
+      </>
     );
   }
 }
@@ -40,23 +43,10 @@ ContactList.propTypes = {
   deleteTodo: PropTypes.func,
 };
 
-// const { filter, contacts } = this.state;
-
-// const filterTodos = contacts.filter(({ name }) =>
-//   name.toLowerCase().includes(filter)
-// );
-
-const mapStateToProps = (state) => {
-  const { filter, items } = state.contact;
-
-  const filterTodos = items.filter(({ name }) =>
-    name.toLowerCase().includes(filter)
-  );
-
-  return {
-    filterTodos: filterTodos,
-  };
-};
+const mapStateToProps = (state) => ({
+  filterTodos: getFilterContacts(state),
+  // isLoadingItems: state.contact.loading,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   deleteTodo: (id) => dispatch(deleteContact(id)),
